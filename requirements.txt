@@ -5,4 +5,3 @@ Flask-WTF
 Werkzeug
 SQLAlchemy
 email_validator
-gunicorn
