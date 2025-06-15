@@ -4,6 +4,7 @@ from flask_login import LoginManager, current_user, login_user, logout_user, log
 from db_instance import db
 from models import User, News
 from forms import LoginForm, RegistrationForm, NewsForm
+from api_bp import api_bp
 
 # Инициализация Flask приложения
 app = Flask(__name__)
@@ -17,7 +18,7 @@ db.init_app(app)
 # Инициализация Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'auth_bp.login'
+login_manager.login_view = 'login'
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -28,6 +29,9 @@ def load_user(user_id):
 
 with app.app_context():
     db.create_all()
+
+# Регистрация Blueprint API
+app.register_blueprint(api_bp)
 
 # --- Фронтенд маршруты ---
 
